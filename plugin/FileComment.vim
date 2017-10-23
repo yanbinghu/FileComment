@@ -1,7 +1,8 @@
 "comment
 " 当新建 .h .c .hpp .cpp .mk .sh等文件时自动调用SetTitle 函数  
 autocmd BufNewFile *.[ch],*.hpp,*.cpp,Makefile,*.mk,*.sh exec ":call SetTitle()"   
-  
+nmap <F3>:call SetFunComment()<CR><CR>
+nmap <F4>:call AddModify()<CR><CR>
 " 加入注释   
 func SetComment()  
     call setline(1,"/*================================================================")   
@@ -73,3 +74,54 @@ func SetTitle()
   
     endif  
 endfunc  
+func SetFunComment()
+    let printfstr=""
+    let printfstr.=escape(getline(line(".")),'"')." "
+    call append(line(".")-1,"/*************************************")
+    let list1=split(printfstr,"(")
+    let list2 = split(list1[0]," ")
+    let funName="函数名："
+    let funName.=list2[1]
+    let returnPara = "fanhuizhi"
+    let returnPara.=list2[0]
+    let fun="gongnengmiaoshu"
+    let output="shuchucanshu"
+    call append(line(".")-1,funName)
+    call append(line(".")-1,fun)
+    let list = split(list1[1],",")
+    let paraNum = len(list)
+    let i = 0
+    let para="shurucanshu"
+    if paraNum>1
+        let para=""
+        while 1 < paraNum-1
+            if i==0
+    		let para="shurucanshu"
+	    else
+		let para="   "
+	    endif
+		let para.=list[i]
+		call append(line(".")-1,para)
+		let i=i+1
+	endwhile
+	let listend=split(list[paraNum-1],")")
+	let para=""
+        let para.=listend[0]
+	call append(line(".")-1,para)
+    else
+	let listend = split(list[paraNum-1],")")
+	let para="shurucanshu"
+	let para.=listend[0]
+	call append(line(".")-1,para)
+    endif
+    call append(line(".")-1,output)
+    call append(line(".")-1,returnPara)
+    call append(line(".")-1,"")
+    call append(line(".")-1,"日期：".strftime("%Y年%m月%d日"))
+    call append(line(".")-1,"作者：hyb")
+    call append(line(".")-1,"修改历史，新生成函数")
+endfun
+func AddModify()
+    call append(line(".")-1,"日期：".strftime("%Y年%m月%d日"))
+    call append(line(".")-1,"作者：hyb")
+    call append(line(".")-1,"修改日志")
