@@ -1,12 +1,12 @@
 "comment
 " 当新建 .h .c .hpp .cpp .mk .sh等文件时自动调用SetTitle 函数  
 autocmd BufNewFile *.[ch],*.hpp,*.cpp,Makefile,*.mk,*.sh exec ":call SetTitle()"   
-nmap <F3>:call SetFunComment()<CR><CR>
-nmap <F4>:call AddModify()<CR><CR>
+nmap <F3> :call SetFunComment()<CR><CR>
+nmap <F4> :call AddModify()<CR><CR>
 " 加入注释   
 func SetComment()  
     call setline(1,"/*================================================================")   
-    call append(line("."),   "*   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line("."),   "*   Copyright (C) ".strftime("%Y")." . All rights reserved.")  
     call append(line(".")+1, "*   ")   
     call append(line(".")+2, "*   文件名称：".expand("%:t"))   
     call append(line(".")+3, "*   创 建 者：hyb")  
