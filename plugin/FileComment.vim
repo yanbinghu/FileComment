@@ -125,3 +125,4 @@ func AddModify()
     call append(line(".")-1,"日期：".strftime("%Y年%m月%d日"))
     call append(line(".")-1,"作者：hyb")
     call append(line(".")-1,"修改日志")
+endfun
